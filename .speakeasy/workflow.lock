@@ -1,0 +1,37 @@
+speakeasyVersion: 1.589.0
+sources:
+    PatternReveal API:
+        sourceNamespace: pattern-reveal-api
+        sourceRevisionDigest: sha256:48fbe6b645b82d6ab0dbf1e59770ed214a6eea792cb6a9cecc26724722188f9e
+        sourceBlobDigest: sha256:32dd11d353c750d27f96f83103e6b614524824e27c32008c06b415987c55a6a2
+        tags:
+            - latest
+            - 0.0.1
+targets:
+    patternreveal:
+        source: PatternReveal API
+        sourceNamespace: pattern-reveal-api
+        sourceRevisionDigest: sha256:48fbe6b645b82d6ab0dbf1e59770ed214a6eea792cb6a9cecc26724722188f9e
+        sourceBlobDigest: sha256:32dd11d353c750d27f96f83103e6b614524824e27c32008c06b415987c55a6a2
+        codeSamplesNamespace: pattern-reveal-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:3f53bf763c14c530a086505006a253af79b7026e07a49e7b4941dd12671a3a91
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        PatternReveal API:
+            inputs:
+                - location: openapi.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/patternreveal/api/pattern-reveal-api
+    targets:
+        patternreveal:
+            target: typescript
+            source: PatternReveal API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/patternreveal/api/pattern-reveal-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false
