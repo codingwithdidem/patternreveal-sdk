@@ -1,0 +1,130 @@
+DEBUG	append_error: Renamed component to "BadRequest_error" 
+	 labels: "original_name:BadRequest scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:BadRequest component:true originalName:BadRequest"
+DEBUG	append_error: Renamed component to "Unauthorized_error" 
+	 labels: "original_name:Unauthorized scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:Unauthorized component:true originalName:Unauthorized"
+DEBUG	append_error: Renamed component to "Forbidden_error" 
+	 labels: "original_name:Forbidden scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:Forbidden component:true originalName:Forbidden"
+DEBUG	append_error: Renamed component to "NotFound_error" 
+	 labels: "original_name:NotFound scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:NotFound component:true originalName:NotFound"
+DEBUG	append_error: Renamed component to "Conflict_error" 
+	 labels: "original_name:Conflict scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:Conflict component:true originalName:Conflict"
+DEBUG	append_error: Renamed component to "InviteExpired_error" 
+	 labels: "original_name:InviteExpired scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:InviteExpired component:true originalName:InviteExpired"
+DEBUG	append_error: Renamed component to "UnprocessableEntity_error" 
+	 labels: "original_name:UnprocessableEntity scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:UnprocessableEntity component:true originalName:UnprocessableEntity"
+DEBUG	append_error: Renamed component to "RateLimitExceeded_error" 
+	 labels: "original_name:RateLimitExceeded scope:errors data_type:error refType:response" 
+	 registrationID: "scope:errors refType:Responses refName:RateLimitExceeded component:true originalName:RateLimitExceeded"
+DEBUG	prepend_op_id: Renamed to "updateWorkspace_RequestBody" 
+	 labels: "original_name:RequestBody operation:updateWorkspace operationTag:Workspaces requestResponse:request" 
+	 registrationID: "scope:operations operationTag:Workspaces operation:updateWorkspace requestResponse:request originalName:RequestBody"
+DEBUG	
+
+--- Renaming 9 types with name "code" ---
+DEBUG	discriminated: Renamed to "BadRequest_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:BadRequest" 
+	 registrationID: "scope:shared refType:Responses refName:BadRequest constProperty:BadRequest constProperty:bad_request originalName:code"
+DEBUG	discriminated: Renamed to "Unauthorized_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:Unauthorized" 
+	 registrationID: "scope:shared refType:Responses refName:Unauthorized constProperty:Unauthorized constProperty:unauthorized originalName:code"
+DEBUG	discriminated: Renamed to "Forbidden_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:Forbidden" 
+	 registrationID: "scope:shared refType:Responses refName:Forbidden constProperty:Forbidden constProperty:forbidden originalName:code"
+DEBUG	discriminated: Renamed to "NotFound_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:NotFound" 
+	 registrationID: "scope:shared refType:Responses refName:NotFound constProperty:NotFound constProperty:not_found originalName:code"
+DEBUG	discriminated: Renamed to "Conflict_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:Conflict" 
+	 registrationID: "scope:shared refType:Responses refName:Conflict constProperty:Conflict constProperty:conflict originalName:code"
+DEBUG	discriminated: Renamed to "InviteExpired_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:InviteExpired" 
+	 registrationID: "scope:shared refType:Responses refName:InviteExpired constProperty:InviteExpired constProperty:invite_expired originalName:code"
+DEBUG	discriminated: Renamed to "UnprocessableEntity_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:UnprocessableEntity" 
+	 registrationID: "scope:shared refType:Responses refName:UnprocessableEntity constProperty:UnprocessableEntity constProperty:unprocessable_entity originalName:code"
+DEBUG	discriminated: Renamed to "RateLimitExceeded_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:RateLimitExceeded" 
+	 registrationID: "scope:shared refType:Responses refName:RateLimitExceeded constProperty:RateLimitExceeded constProperty:rate_limit_exceeded originalName:code"
+DEBUG	discriminated: Renamed to "InternalServerError_code" 
+	 labels: "original_name:code scope:shared data_type:enum refType:response refName:InternalServerError" 
+	 registrationID: "scope:shared refType:Responses refName:InternalServerError constProperty:InternalServerError constProperty:internal_server_error originalName:code"
+DEBUG	
+
+--- Renaming 9 types with name "error" ---
+DEBUG	discriminated: Renamed to "BadRequest_error" 
+	 labels: "original_name:error scope:shared refType:response refName:BadRequest" 
+	 registrationID: "scope:shared refType:Responses refName:BadRequest constProperty:BadRequest originalName:error"
+DEBUG	discriminated: Renamed to "Unauthorized_error" 
+	 labels: "original_name:error scope:shared refType:response refName:Unauthorized" 
+	 registrationID: "scope:shared refType:Responses refName:Unauthorized constProperty:Unauthorized originalName:error"
+DEBUG	discriminated: Renamed to "Forbidden_error" 
+	 labels: "original_name:error scope:shared refType:response refName:Forbidden" 
+	 registrationID: "scope:shared refType:Responses refName:Forbidden constProperty:Forbidden originalName:error"
+DEBUG	discriminated: Renamed to "NotFound_error" 
+	 labels: "original_name:error scope:shared refType:response refName:NotFound" 
+	 registrationID: "scope:shared refType:Responses refName:NotFound constProperty:NotFound originalName:error"
+DEBUG	discriminated: Renamed to "Conflict_error" 
+	 labels: "original_name:error scope:shared refType:response refName:Conflict" 
+	 registrationID: "scope:shared refType:Responses refName:Conflict constProperty:Conflict originalName:error"
+DEBUG	discriminated: Renamed to "InviteExpired_error" 
+	 labels: "original_name:error scope:shared refType:response refName:InviteExpired" 
+	 registrationID: "scope:shared refType:Responses refName:InviteExpired constProperty:InviteExpired originalName:error"
+DEBUG	discriminated: Renamed to "UnprocessableEntity_error" 
+	 labels: "original_name:error scope:shared refType:response refName:UnprocessableEntity" 
+	 registrationID: "scope:shared refType:Responses refName:UnprocessableEntity constProperty:UnprocessableEntity originalName:error"
+DEBUG	discriminated: Renamed to "RateLimitExceeded_error" 
+	 labels: "original_name:error scope:shared refType:response refName:RateLimitExceeded" 
+	 registrationID: "scope:shared refType:Responses refName:RateLimitExceeded constProperty:RateLimitExceeded originalName:error"
+DEBUG	discriminated: Renamed to "InternalServerError_error" 
+	 labels: "original_name:error scope:shared refType:response refName:InternalServerError" 
+	 registrationID: "scope:shared refType:Responses refName:InternalServerError constProperty:InternalServerError originalName:error"
+DEBUG	prepend_op_id: N/A rename "updateWorkspace_RequestBody" 
+	 labels: "original_name:RequestBody operation:updateWorkspace operationTag:Workspaces requestResponse:request" 
+	 registrationID: "scope:operations operationTag:Workspaces operation:updateWorkspace requestResponse:request originalName:RequestBody"
+DEBUG	
+
+Patternreveal (SDK empty)
+Workspaces (SDK empty)
+GetWorkspaceRequest (idOrSlug: string)
+WorkspaceSchema (id: string, name: string, slug: string ...)
+ Plan (enum: free, pro)
+  User (role: enum)
+   Role (enum: OWNER, MEMBER)
+BadRequestError (error)
+ BadRequestError (code: enum, message: string, doc_url: string)
+  BadRequestCode (enum: bad_request)
+UnauthorizedError (error)
+ UnauthorizedError (code: enum, message: string, doc_url: string)
+  UnauthorizedCode (enum: unauthorized)
+ForbiddenError (error)
+ ForbiddenError (code: enum, message: string, doc_url: string)
+  ForbiddenCode (enum: forbidden)
+NotFoundError (error)
+ NotFoundError (code: enum, message: string, doc_url: string)
+  NotFoundCode (enum: not_found)
+ConflictError (error)
+ ConflictError (code: enum, message: string, doc_url: string)
+  ConflictCode (enum: conflict)
+InviteExpiredError (error)
+ InviteExpiredError (code: enum, message: string, doc_url: string)
+  InviteExpiredCode (enum: invite_expired)
+UnprocessableEntityError (error)
+ UnprocessableEntityError (code: enum, message: string, doc_url: string)
+  UnprocessableEntityCode (enum: unprocessable_entity)
+RateLimitExceededError (error)
+ RateLimitExceededError (code: enum, message: string, doc_url: string)
+  RateLimitExceededCode (enum: rate_limit_exceeded)
+InternalServerError (error)
+ InternalServerErrorError (code: enum, message: string, doc_url: string)
+  InternalServerErrorCode (enum: internal_server_error)
+Security (token: string)
+UpdateWorkspaceRequest (idOrSlug: string, RequestBody: class)
+ UpdateWorkspaceRequestBody (name: string, slug: string)
+
