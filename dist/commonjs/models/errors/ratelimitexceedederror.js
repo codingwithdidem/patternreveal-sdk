@@ -36,8 +36,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RateLimitExceededError$ = exports.RateLimitExceededError$outboundSchema = exports.RateLimitExceededError$inboundSchema = exports.RateLimitExceededError = void 0;
-const z = __importStar(require("zod"));
+exports.RateLimitExceededError$inboundSchema = exports.RateLimitExceededError = void 0;
+const z = __importStar(require("zod/v3"));
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -68,21 +68,4 @@ exports.RateLimitExceededError$inboundSchema = z.object({
         body: v.body$,
     });
 });
-/** @internal */
-exports.RateLimitExceededError$outboundSchema = z.instanceof(RateLimitExceededError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.RateLimitExceededError$outboundSchema),
-}));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var RateLimitExceededError$;
-(function (RateLimitExceededError$) {
-    /** @deprecated use `RateLimitExceededError$inboundSchema` instead. */
-    RateLimitExceededError$.inboundSchema = exports.RateLimitExceededError$inboundSchema;
-    /** @deprecated use `RateLimitExceededError$outboundSchema` instead. */
-    RateLimitExceededError$.outboundSchema = exports.RateLimitExceededError$outboundSchema;
-})(RateLimitExceededError$ || (exports.RateLimitExceededError$ = RateLimitExceededError$ = {}));
 //# sourceMappingURL=ratelimitexceedederror.js.map

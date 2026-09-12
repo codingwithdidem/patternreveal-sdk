@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 export interface Env {
     PATTERNREVEAL_TOKEN?: string | undefined;
     PATTERNREVEAL_DEBUG?: boolean | undefined;
