@@ -39,12 +39,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.envSchema = void 0;
 exports.env = env;
 exports.resetEnv = resetEnv;
-const dlv_js_1 = require("./dlv.js");
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 exports.envSchema = z.object({
     PATTERNREVEAL_TOKEN: z.string().optional(),
     PATTERNREVEAL_DEBUG: z.coerce.boolean().optional(),
 });
+/**
+ * Checks for the existence of the Deno global object to determine the environment.
+ * @returns {boolean} True if the runtime is Deno, false otherwise.
+ */
+function isDeno() {
+    if ("Deno" in globalThis) {
+        return true;
+    }
+    return false;
+}
 let envMemo = undefined;
 /**
  * Reads and validates environment variables.
@@ -53,7 +62,15 @@ function env() {
     if (envMemo) {
         return envMemo;
     }
-    envMemo = exports.envSchema.parse((0, dlv_js_1.dlv)(globalThis, "process.env") ?? (0, dlv_js_1.dlv)(globalThis, "Deno.env") ?? {});
+    const globals = globalThis;
+    let envObject = {};
+    if (isDeno()) {
+        envObject = globals.Deno?.env?.toObject?.() ?? {};
+    }
+    else {
+        envObject = globals.process?.env ?? {};
+    }
+    envMemo = exports.envSchema.parse(envObject);
     return envMemo;
 }
 /**

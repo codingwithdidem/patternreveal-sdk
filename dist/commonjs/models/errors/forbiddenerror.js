@@ -36,8 +36,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ForbiddenError$ = exports.ForbiddenError$outboundSchema = exports.ForbiddenError$inboundSchema = exports.ForbiddenError = void 0;
-const z = __importStar(require("zod"));
+exports.ForbiddenError$inboundSchema = exports.ForbiddenError = void 0;
+const z = __importStar(require("zod/v3"));
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -68,21 +68,4 @@ exports.ForbiddenError$inboundSchema = z.object({
         body: v.body$,
     });
 });
-/** @internal */
-exports.ForbiddenError$outboundSchema = z.instanceof(ForbiddenError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.ForbiddenError$outboundSchema),
-}));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var ForbiddenError$;
-(function (ForbiddenError$) {
-    /** @deprecated use `ForbiddenError$inboundSchema` instead. */
-    ForbiddenError$.inboundSchema = exports.ForbiddenError$inboundSchema;
-    /** @deprecated use `ForbiddenError$outboundSchema` instead. */
-    ForbiddenError$.outboundSchema = exports.ForbiddenError$outboundSchema;
-})(ForbiddenError$ || (exports.ForbiddenError$ = ForbiddenError$ = {}));
 //# sourceMappingURL=forbiddenerror.js.map

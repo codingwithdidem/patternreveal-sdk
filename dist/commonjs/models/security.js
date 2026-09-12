@@ -36,34 +36,14 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Security$ = exports.Security$outboundSchema = exports.Security$inboundSchema = void 0;
+exports.Security$outboundSchema = void 0;
 exports.securityToJSON = securityToJSON;
-exports.securityFromJSON = securityFromJSON;
-const z = __importStar(require("zod"));
-const schemas_js_1 = require("../lib/schemas.js");
-/** @internal */
-exports.Security$inboundSchema = z.object({
-    token: z.string().optional(),
-});
+const z = __importStar(require("zod/v3"));
 /** @internal */
 exports.Security$outboundSchema = z.object({
     token: z.string().optional(),
 });
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var Security$;
-(function (Security$) {
-    /** @deprecated use `Security$inboundSchema` instead. */
-    Security$.inboundSchema = exports.Security$inboundSchema;
-    /** @deprecated use `Security$outboundSchema` instead. */
-    Security$.outboundSchema = exports.Security$outboundSchema;
-})(Security$ || (exports.Security$ = Security$ = {}));
 function securityToJSON(security) {
     return JSON.stringify(exports.Security$outboundSchema.parse(security));
-}
-function securityFromJSON(jsonString) {
-    return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.Security$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'Security' from JSON`);
 }
 //# sourceMappingURL=security.js.map

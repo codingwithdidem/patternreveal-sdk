@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 import * as models from "../index.js";
 import { PatternrevealError } from "./patternrevealerror.js";
 /**
@@ -22,22 +22,4 @@ export declare class InviteExpiredError extends PatternrevealError {
 }
 /** @internal */
 export declare const InviteExpiredError$inboundSchema: z.ZodType<InviteExpiredError, z.ZodTypeDef, unknown>;
-/** @internal */
-export type InviteExpiredError$Outbound = {
-    error: models.InviteExpiredError$Outbound;
-};
-/** @internal */
-export declare const InviteExpiredError$outboundSchema: z.ZodType<InviteExpiredError$Outbound, z.ZodTypeDef, InviteExpiredError>;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export declare namespace InviteExpiredError$ {
-    /** @deprecated use `InviteExpiredError$inboundSchema` instead. */
-    const inboundSchema: z.ZodType<InviteExpiredError, z.ZodTypeDef, unknown>;
-    /** @deprecated use `InviteExpiredError$outboundSchema` instead. */
-    const outboundSchema: z.ZodType<InviteExpiredError$Outbound, z.ZodTypeDef, InviteExpiredError>;
-    /** @deprecated use `InviteExpiredError$Outbound` instead. */
-    type Outbound = InviteExpiredError$Outbound;
-}
 //# sourceMappingURL=inviteexpirederror.d.ts.map
