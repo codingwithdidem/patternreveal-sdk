@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 import * as models from "../index.js";
 import { PatternrevealError } from "./patternrevealerror.js";
 /**
@@ -22,22 +22,4 @@ export declare class BadRequestError extends PatternrevealError {
 }
 /** @internal */
 export declare const BadRequestError$inboundSchema: z.ZodType<BadRequestError, z.ZodTypeDef, unknown>;
-/** @internal */
-export type BadRequestError$Outbound = {
-    error: models.BadRequestError$Outbound;
-};
-/** @internal */
-export declare const BadRequestError$outboundSchema: z.ZodType<BadRequestError$Outbound, z.ZodTypeDef, BadRequestError>;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export declare namespace BadRequestError$ {
-    /** @deprecated use `BadRequestError$inboundSchema` instead. */
-    const inboundSchema: z.ZodType<BadRequestError, z.ZodTypeDef, unknown>;
-    /** @deprecated use `BadRequestError$outboundSchema` instead. */
-    const outboundSchema: z.ZodType<BadRequestError$Outbound, z.ZodTypeDef, BadRequestError>;
-    /** @deprecated use `BadRequestError$Outbound` instead. */
-    type Outbound = BadRequestError$Outbound;
-}
 //# sourceMappingURL=badrequesterror.d.ts.map
