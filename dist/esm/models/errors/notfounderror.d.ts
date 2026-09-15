@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 import * as models from "../index.js";
 import { PatternrevealError } from "./patternrevealerror.js";
 /**
@@ -22,22 +22,4 @@ export declare class NotFoundError extends PatternrevealError {
 }
 /** @internal */
 export declare const NotFoundError$inboundSchema: z.ZodType<NotFoundError, z.ZodTypeDef, unknown>;
-/** @internal */
-export type NotFoundError$Outbound = {
-    error: models.NotFoundError$Outbound;
-};
-/** @internal */
-export declare const NotFoundError$outboundSchema: z.ZodType<NotFoundError$Outbound, z.ZodTypeDef, NotFoundError>;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export declare namespace NotFoundError$ {
-    /** @deprecated use `NotFoundError$inboundSchema` instead. */
-    const inboundSchema: z.ZodType<NotFoundError, z.ZodTypeDef, unknown>;
-    /** @deprecated use `NotFoundError$outboundSchema` instead. */
-    const outboundSchema: z.ZodType<NotFoundError$Outbound, z.ZodTypeDef, NotFoundError>;
-    /** @deprecated use `NotFoundError$Outbound` instead. */
-    type Outbound = NotFoundError$Outbound;
-}
 //# sourceMappingURL=notfounderror.d.ts.map

@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 import * as models from "../index.js";
 import { PatternrevealError } from "./patternrevealerror.js";
 /**
@@ -22,22 +22,4 @@ export declare class UnauthorizedError extends PatternrevealError {
 }
 /** @internal */
 export declare const UnauthorizedError$inboundSchema: z.ZodType<UnauthorizedError, z.ZodTypeDef, unknown>;
-/** @internal */
-export type UnauthorizedError$Outbound = {
-    error: models.UnauthorizedError$Outbound;
-};
-/** @internal */
-export declare const UnauthorizedError$outboundSchema: z.ZodType<UnauthorizedError$Outbound, z.ZodTypeDef, UnauthorizedError>;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export declare namespace UnauthorizedError$ {
-    /** @deprecated use `UnauthorizedError$inboundSchema` instead. */
-    const inboundSchema: z.ZodType<UnauthorizedError, z.ZodTypeDef, unknown>;
-    /** @deprecated use `UnauthorizedError$outboundSchema` instead. */
-    const outboundSchema: z.ZodType<UnauthorizedError$Outbound, z.ZodTypeDef, UnauthorizedError>;
-    /** @deprecated use `UnauthorizedError$Outbound` instead. */
-    type Outbound = UnauthorizedError$Outbound;
-}
 //# sourceMappingURL=unauthorizederror.d.ts.map
