@@ -1,5 +1,4 @@
 # Workspaces
-(*workspaces*)
 
 ## Overview
 
@@ -14,6 +13,7 @@ Retrieve a workspace for the authenticated user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspace" method="get" path="/workspaces/{idOrSlug}" -->
 ```typescript
 import { Patternreveal } from "patternreveal";
 
@@ -95,6 +95,7 @@ Update a workspace by ID or slug.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateWorkspace" method="patch" path="/workspaces/{idOrSlug}" -->
 ```typescript
 import { Patternreveal } from "patternreveal";
 
