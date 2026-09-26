@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 import * as models from "../index.js";
 import { PatternrevealError } from "./patternrevealerror.js";
 /**
@@ -22,22 +22,4 @@ export declare class RateLimitExceededError extends PatternrevealError {
 }
 /** @internal */
 export declare const RateLimitExceededError$inboundSchema: z.ZodType<RateLimitExceededError, z.ZodTypeDef, unknown>;
-/** @internal */
-export type RateLimitExceededError$Outbound = {
-    error: models.RateLimitExceededError$Outbound;
-};
-/** @internal */
-export declare const RateLimitExceededError$outboundSchema: z.ZodType<RateLimitExceededError$Outbound, z.ZodTypeDef, RateLimitExceededError>;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export declare namespace RateLimitExceededError$ {
-    /** @deprecated use `RateLimitExceededError$inboundSchema` instead. */
-    const inboundSchema: z.ZodType<RateLimitExceededError, z.ZodTypeDef, unknown>;
-    /** @deprecated use `RateLimitExceededError$outboundSchema` instead. */
-    const outboundSchema: z.ZodType<RateLimitExceededError$Outbound, z.ZodTypeDef, RateLimitExceededError>;
-    /** @deprecated use `RateLimitExceededError$Outbound` instead. */
-    type Outbound = RateLimitExceededError$Outbound;
-}
 //# sourceMappingURL=ratelimitexceedederror.d.ts.map
