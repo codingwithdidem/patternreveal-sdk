@@ -36,8 +36,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BadRequestError$ = exports.BadRequestError$outboundSchema = exports.BadRequestError$inboundSchema = exports.BadRequestError = void 0;
-const z = __importStar(require("zod"));
+exports.BadRequestError$inboundSchema = exports.BadRequestError = void 0;
+const z = __importStar(require("zod/v3"));
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -68,21 +68,4 @@ exports.BadRequestError$inboundSchema = z.object({
         body: v.body$,
     });
 });
-/** @internal */
-exports.BadRequestError$outboundSchema = z.instanceof(BadRequestError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.BadRequestError$outboundSchema),
-}));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var BadRequestError$;
-(function (BadRequestError$) {
-    /** @deprecated use `BadRequestError$inboundSchema` instead. */
-    BadRequestError$.inboundSchema = exports.BadRequestError$inboundSchema;
-    /** @deprecated use `BadRequestError$outboundSchema` instead. */
-    BadRequestError$.outboundSchema = exports.BadRequestError$outboundSchema;
-})(BadRequestError$ || (exports.BadRequestError$ = BadRequestError$ = {}));
 //# sourceMappingURL=badrequesterror.js.map

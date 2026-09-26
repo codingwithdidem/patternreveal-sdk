@@ -36,8 +36,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnprocessableEntityError$ = exports.UnprocessableEntityError$outboundSchema = exports.UnprocessableEntityError$inboundSchema = exports.UnprocessableEntityError = void 0;
-const z = __importStar(require("zod"));
+exports.UnprocessableEntityError$inboundSchema = exports.UnprocessableEntityError = void 0;
+const z = __importStar(require("zod/v3"));
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -68,21 +68,4 @@ exports.UnprocessableEntityError$inboundSchema = z.object({
         body: v.body$,
     });
 });
-/** @internal */
-exports.UnprocessableEntityError$outboundSchema = z.instanceof(UnprocessableEntityError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.UnprocessableEntityError$outboundSchema),
-}));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UnprocessableEntityError$;
-(function (UnprocessableEntityError$) {
-    /** @deprecated use `UnprocessableEntityError$inboundSchema` instead. */
-    UnprocessableEntityError$.inboundSchema = exports.UnprocessableEntityError$inboundSchema;
-    /** @deprecated use `UnprocessableEntityError$outboundSchema` instead. */
-    UnprocessableEntityError$.outboundSchema = exports.UnprocessableEntityError$outboundSchema;
-})(UnprocessableEntityError$ || (exports.UnprocessableEntityError$ = UnprocessableEntityError$ = {}));
 //# sourceMappingURL=unprocessableentityerror.js.map
