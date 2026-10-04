@@ -25,6 +25,7 @@ __exportStar(require("./internalservererror.js"), exports);
 __exportStar(require("./inviteexpirederror.js"), exports);
 __exportStar(require("./notfounderror.js"), exports);
 __exportStar(require("./patternrevealdefaulterror.js"), exports);
+__exportStar(require("./patternrevealerror.js"), exports);
 __exportStar(require("./ratelimitexceedederror.js"), exports);
 __exportStar(require("./responsevalidationerror.js"), exports);
 __exportStar(require("./sdkvalidationerror.js"), exports);
