@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InternalServerErrorError$ = exports.InternalServerErrorError$outboundSchema = exports.InternalServerErrorError$inboundSchema = exports.InternalServerErrorCode$ = exports.InternalServerErrorCode$outboundSchema = exports.InternalServerErrorCode$inboundSchema = exports.InternalServerErrorCode = void 0;
-exports.internalServerErrorErrorToJSON = internalServerErrorErrorToJSON;
+exports.InternalServerErrorError$inboundSchema = exports.InternalServerErrorCode$inboundSchema = exports.InternalServerErrorCode = void 0;
 exports.internalServerErrorErrorFromJSON = internalServerErrorErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -51,19 +50,6 @@ exports.InternalServerErrorCode = {
 /** @internal */
 exports.InternalServerErrorCode$inboundSchema = z.nativeEnum(exports.InternalServerErrorCode);
 /** @internal */
-exports.InternalServerErrorCode$outboundSchema = exports.InternalServerErrorCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var InternalServerErrorCode$;
-(function (InternalServerErrorCode$) {
-    /** @deprecated use `InternalServerErrorCode$inboundSchema` instead. */
-    InternalServerErrorCode$.inboundSchema = exports.InternalServerErrorCode$inboundSchema;
-    /** @deprecated use `InternalServerErrorCode$outboundSchema` instead. */
-    InternalServerErrorCode$.outboundSchema = exports.InternalServerErrorCode$outboundSchema;
-})(InternalServerErrorCode$ || (exports.InternalServerErrorCode$ = InternalServerErrorCode$ = {}));
-/** @internal */
 exports.InternalServerErrorError$inboundSchema = z.object({
     code: exports.InternalServerErrorCode$inboundSchema,
     message: z.string(),
@@ -73,30 +59,6 @@ exports.InternalServerErrorError$inboundSchema = z.object({
         "doc_url": "docUrl",
     });
 });
-/** @internal */
-exports.InternalServerErrorError$outboundSchema = z.object({
-    code: exports.InternalServerErrorCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var InternalServerErrorError$;
-(function (InternalServerErrorError$) {
-    /** @deprecated use `InternalServerErrorError$inboundSchema` instead. */
-    InternalServerErrorError$.inboundSchema = exports.InternalServerErrorError$inboundSchema;
-    /** @deprecated use `InternalServerErrorError$outboundSchema` instead. */
-    InternalServerErrorError$.outboundSchema = exports.InternalServerErrorError$outboundSchema;
-})(InternalServerErrorError$ || (exports.InternalServerErrorError$ = InternalServerErrorError$ = {}));
-function internalServerErrorErrorToJSON(internalServerErrorError) {
-    return JSON.stringify(exports.InternalServerErrorError$outboundSchema.parse(internalServerErrorError));
-}
 function internalServerErrorErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.InternalServerErrorError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'InternalServerErrorError' from JSON`);
 }
