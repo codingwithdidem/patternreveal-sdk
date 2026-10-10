@@ -37,7 +37,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResponseValidationError = void 0;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 const sdkvalidationerror_js_1 = require("./sdkvalidationerror.js");
 class ResponseValidationError extends patternrevealerror_js_1.PatternrevealError {

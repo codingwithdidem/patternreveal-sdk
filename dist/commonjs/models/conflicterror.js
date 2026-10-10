@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConflictError$ = exports.ConflictError$outboundSchema = exports.ConflictError$inboundSchema = exports.ConflictCode$ = exports.ConflictCode$outboundSchema = exports.ConflictCode$inboundSchema = exports.ConflictCode = void 0;
-exports.conflictErrorToJSON = conflictErrorToJSON;
+exports.ConflictError$inboundSchema = exports.ConflictCode$inboundSchema = exports.ConflictCode = void 0;
 exports.conflictErrorFromJSON = conflictErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -51,19 +50,6 @@ exports.ConflictCode = {
 /** @internal */
 exports.ConflictCode$inboundSchema = z.nativeEnum(exports.ConflictCode);
 /** @internal */
-exports.ConflictCode$outboundSchema = exports.ConflictCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var ConflictCode$;
-(function (ConflictCode$) {
-    /** @deprecated use `ConflictCode$inboundSchema` instead. */
-    ConflictCode$.inboundSchema = exports.ConflictCode$inboundSchema;
-    /** @deprecated use `ConflictCode$outboundSchema` instead. */
-    ConflictCode$.outboundSchema = exports.ConflictCode$outboundSchema;
-})(ConflictCode$ || (exports.ConflictCode$ = ConflictCode$ = {}));
-/** @internal */
 exports.ConflictError$inboundSchema = z.object({
     code: exports.ConflictCode$inboundSchema,
     message: z.string(),
@@ -73,30 +59,6 @@ exports.ConflictError$inboundSchema = z.object({
         "doc_url": "docUrl",
     });
 });
-/** @internal */
-exports.ConflictError$outboundSchema = z.object({
-    code: exports.ConflictCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var ConflictError$;
-(function (ConflictError$) {
-    /** @deprecated use `ConflictError$inboundSchema` instead. */
-    ConflictError$.inboundSchema = exports.ConflictError$inboundSchema;
-    /** @deprecated use `ConflictError$outboundSchema` instead. */
-    ConflictError$.outboundSchema = exports.ConflictError$outboundSchema;
-})(ConflictError$ || (exports.ConflictError$ = ConflictError$ = {}));
-function conflictErrorToJSON(conflictError) {
-    return JSON.stringify(exports.ConflictError$outboundSchema.parse(conflictError));
-}
 function conflictErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.ConflictError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'ConflictError' from JSON`);
 }

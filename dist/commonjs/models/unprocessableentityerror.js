@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnprocessableEntityError$ = exports.UnprocessableEntityError$outboundSchema = exports.UnprocessableEntityError$inboundSchema = exports.UnprocessableEntityCode$ = exports.UnprocessableEntityCode$outboundSchema = exports.UnprocessableEntityCode$inboundSchema = exports.UnprocessableEntityCode = void 0;
-exports.unprocessableEntityErrorToJSON = unprocessableEntityErrorToJSON;
+exports.UnprocessableEntityError$inboundSchema = exports.UnprocessableEntityCode$inboundSchema = exports.UnprocessableEntityCode = void 0;
 exports.unprocessableEntityErrorFromJSON = unprocessableEntityErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -51,19 +50,6 @@ exports.UnprocessableEntityCode = {
 /** @internal */
 exports.UnprocessableEntityCode$inboundSchema = z.nativeEnum(exports.UnprocessableEntityCode);
 /** @internal */
-exports.UnprocessableEntityCode$outboundSchema = exports.UnprocessableEntityCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UnprocessableEntityCode$;
-(function (UnprocessableEntityCode$) {
-    /** @deprecated use `UnprocessableEntityCode$inboundSchema` instead. */
-    UnprocessableEntityCode$.inboundSchema = exports.UnprocessableEntityCode$inboundSchema;
-    /** @deprecated use `UnprocessableEntityCode$outboundSchema` instead. */
-    UnprocessableEntityCode$.outboundSchema = exports.UnprocessableEntityCode$outboundSchema;
-})(UnprocessableEntityCode$ || (exports.UnprocessableEntityCode$ = UnprocessableEntityCode$ = {}));
-/** @internal */
 exports.UnprocessableEntityError$inboundSchema = z.object({
     code: exports.UnprocessableEntityCode$inboundSchema,
     message: z.string(),
@@ -73,30 +59,6 @@ exports.UnprocessableEntityError$inboundSchema = z.object({
         "doc_url": "docUrl",
     });
 });
-/** @internal */
-exports.UnprocessableEntityError$outboundSchema = z.object({
-    code: exports.UnprocessableEntityCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UnprocessableEntityError$;
-(function (UnprocessableEntityError$) {
-    /** @deprecated use `UnprocessableEntityError$inboundSchema` instead. */
-    UnprocessableEntityError$.inboundSchema = exports.UnprocessableEntityError$inboundSchema;
-    /** @deprecated use `UnprocessableEntityError$outboundSchema` instead. */
-    UnprocessableEntityError$.outboundSchema = exports.UnprocessableEntityError$outboundSchema;
-})(UnprocessableEntityError$ || (exports.UnprocessableEntityError$ = UnprocessableEntityError$ = {}));
-function unprocessableEntityErrorToJSON(unprocessableEntityError) {
-    return JSON.stringify(exports.UnprocessableEntityError$outboundSchema.parse(unprocessableEntityError));
-}
 function unprocessableEntityErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.UnprocessableEntityError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'UnprocessableEntityError' from JSON`);
 }
