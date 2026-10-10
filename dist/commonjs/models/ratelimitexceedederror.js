@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RateLimitExceededError$ = exports.RateLimitExceededError$outboundSchema = exports.RateLimitExceededError$inboundSchema = exports.RateLimitExceededCode$ = exports.RateLimitExceededCode$outboundSchema = exports.RateLimitExceededCode$inboundSchema = exports.RateLimitExceededCode = void 0;
-exports.rateLimitExceededErrorToJSON = rateLimitExceededErrorToJSON;
+exports.RateLimitExceededError$inboundSchema = exports.RateLimitExceededCode$inboundSchema = exports.RateLimitExceededCode = void 0;
 exports.rateLimitExceededErrorFromJSON = rateLimitExceededErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -51,19 +50,6 @@ exports.RateLimitExceededCode = {
 /** @internal */
 exports.RateLimitExceededCode$inboundSchema = z.nativeEnum(exports.RateLimitExceededCode);
 /** @internal */
-exports.RateLimitExceededCode$outboundSchema = exports.RateLimitExceededCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var RateLimitExceededCode$;
-(function (RateLimitExceededCode$) {
-    /** @deprecated use `RateLimitExceededCode$inboundSchema` instead. */
-    RateLimitExceededCode$.inboundSchema = exports.RateLimitExceededCode$inboundSchema;
-    /** @deprecated use `RateLimitExceededCode$outboundSchema` instead. */
-    RateLimitExceededCode$.outboundSchema = exports.RateLimitExceededCode$outboundSchema;
-})(RateLimitExceededCode$ || (exports.RateLimitExceededCode$ = RateLimitExceededCode$ = {}));
-/** @internal */
 exports.RateLimitExceededError$inboundSchema = z.object({
     code: exports.RateLimitExceededCode$inboundSchema,
     message: z.string(),
@@ -73,30 +59,6 @@ exports.RateLimitExceededError$inboundSchema = z.object({
         "doc_url": "docUrl",
     });
 });
-/** @internal */
-exports.RateLimitExceededError$outboundSchema = z.object({
-    code: exports.RateLimitExceededCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var RateLimitExceededError$;
-(function (RateLimitExceededError$) {
-    /** @deprecated use `RateLimitExceededError$inboundSchema` instead. */
-    RateLimitExceededError$.inboundSchema = exports.RateLimitExceededError$inboundSchema;
-    /** @deprecated use `RateLimitExceededError$outboundSchema` instead. */
-    RateLimitExceededError$.outboundSchema = exports.RateLimitExceededError$outboundSchema;
-})(RateLimitExceededError$ || (exports.RateLimitExceededError$ = RateLimitExceededError$ = {}));
-function rateLimitExceededErrorToJSON(rateLimitExceededError) {
-    return JSON.stringify(exports.RateLimitExceededError$outboundSchema.parse(rateLimitExceededError));
-}
 function rateLimitExceededErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.RateLimitExceededError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'RateLimitExceededError' from JSON`);
 }
