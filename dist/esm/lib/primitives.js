@@ -100,4 +100,21 @@ export function allRequired(v) {
     }
     return v;
 }
+export function isPlainObject(value) {
+    if (value === null || typeof value !== "object")
+        return false;
+    if (Object.prototype.toString.call(value) !== "[object Object]")
+        return false;
+    const proto = Object.getPrototypeOf(value);
+    if (proto === null || proto === Object.prototype)
+        return true;
+    // cross-realm plain objects (vm contexts, iframes) inherit from a
+    // different realm's Object.prototype, which itself has a null prototype
+    try {
+        return Object.getPrototypeOf(proto) === null;
+    }
+    catch {
+        return false;
+    }
+}
 //# sourceMappingURL=primitives.js.map

@@ -5,7 +5,7 @@ import { PatternrevealDefaultError } from "../models/errors/patternrevealdefault
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { ERR, OK } from "../types/fp.js";
 import { matchResponse, matchStatusCode } from "./http.js";
-import { isPlainObject } from "./is-plain-object.js";
+import { isPlainObject } from "./primitives.js";
 const DEFAULT_CONTENT_TYPES = {
     jsonl: "application/jsonl",
     json: "application/json",
@@ -121,7 +121,6 @@ export function match(...matchers) {
                 raw = body;
                 break;
             default:
-                encoding;
                 throw new Error(`Unsupported response type: ${encoding}`);
         }
         if (matcher.enc === "fail") {
