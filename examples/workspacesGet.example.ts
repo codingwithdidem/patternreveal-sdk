@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the patternreveal SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx workspacesGet.ts
+ * npm run build && npx tsx workspacesGet.example.ts
  */
 
 import { Patternreveal } from "patternreveal";
@@ -18,7 +18,7 @@ const patternreveal = new Patternreveal({
 });
 
 async function main() {
-  const result = await patternreveal.get({
+  const result = await patternreveal.workspaces.get({
     idOrSlug: "<value>",
   });
 
