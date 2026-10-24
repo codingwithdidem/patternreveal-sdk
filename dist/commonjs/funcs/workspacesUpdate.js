@@ -38,6 +38,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.workspacesUpdate = workspacesUpdate;
 const encodings_js_1 = require("../lib/encodings.js");
+const http_js_1 = require("../lib/http.js");
 const M = __importStar(require("../lib/matchers.js"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
@@ -85,7 +86,7 @@ async function $do(client, idOrSlug, requestBody, options) {
         options: client._options,
         baseURL: options?.serverURL ?? client._baseURL ?? "",
         operationID: "updateWorkspace",
-        oAuth2Scopes: [],
+        oAuth2Scopes: null,
         resolvedSecurity: requestSecurity,
         securitySource: client._options.token,
         retryConfig: options?.retries
@@ -109,19 +110,7 @@ async function $do(client, idOrSlug, requestBody, options) {
     const req = requestRes.value;
     const doResult = await client._do(req, {
         context,
-        errorCodes: [
-            "400",
-            "401",
-            "403",
-            "404",
-            "409",
-            "410",
-            "422",
-            "429",
-            "4XX",
-            "500",
-            "5XX",
-        ],
+        isErrorStatusCode: (statusCode) => (0, http_js_1.matchStatusCode)({ status: statusCode }, ["4XX", "5XX"]),
         retryConfig: context.retryConfig,
         retryCodes: context.retryCodes,
     });
