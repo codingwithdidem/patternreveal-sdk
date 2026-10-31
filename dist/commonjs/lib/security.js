@@ -8,11 +8,10 @@ exports.resolveSecurity = resolveSecurity;
 exports.resolveGlobalSecurity = resolveGlobalSecurity;
 exports.extractSecurity = extractSecurity;
 const env_js_1 = require("./env.js");
-var SecurityErrorCode;
-(function (SecurityErrorCode) {
-    SecurityErrorCode["Incomplete"] = "incomplete";
-    SecurityErrorCode["UnrecognisedSecurityType"] = "unrecognized_security_type";
-})(SecurityErrorCode || (exports.SecurityErrorCode = SecurityErrorCode = {}));
+exports.SecurityErrorCode = {
+    Incomplete: "incomplete",
+    UnrecognisedSecurityType: "unrecognized_security_type",
+};
 class SecurityError extends Error {
     constructor(code, message) {
         super(message);
@@ -20,10 +19,10 @@ class SecurityError extends Error {
         this.name = "SecurityError";
     }
     static incomplete() {
-        return new SecurityError(SecurityErrorCode.Incomplete, "Security requirements not met in order to perform the operation");
+        return new SecurityError(exports.SecurityErrorCode.Incomplete, "Security requirements not met in order to perform the operation");
     }
     static unrecognizedType(type) {
-        return new SecurityError(SecurityErrorCode.UnrecognisedSecurityType, `Unrecognised security type: ${type}`);
+        return new SecurityError(exports.SecurityErrorCode.UnrecognisedSecurityType, `Unrecognised security type: ${type}`);
     }
 }
 exports.SecurityError = SecurityError;
@@ -102,8 +101,7 @@ function resolveSecurity(...options) {
                 applyBearer(state, spec);
                 break;
             default:
-                spec;
-                throw SecurityError.unrecognizedType(type);
+                throw SecurityError.unrecognizedType((spec, type));
         }
     });
     return state;
@@ -126,14 +124,25 @@ function applyBearer(state, spec) {
         state.headers[spec.fieldName] = value;
     }
 }
-function resolveGlobalSecurity(security) {
-    return resolveSecurity([
-        {
-            fieldName: "Authorization",
-            type: "http:bearer",
-            value: security?.token ?? (0, env_js_1.env)().PATTERNREVEAL_TOKEN,
-        },
-    ]);
+function resolveGlobalSecurity(security, allowedFields) {
+    let inputs = [
+        [
+            {
+                fieldName: "Authorization",
+                type: "http:bearer",
+                value: security?.token ?? (0, env_js_1.env)().PATTERNREVEAL_TOKEN,
+            },
+        ],
+    ];
+    if (allowedFields) {
+        inputs = allowedFields.map((i) => {
+            if (i < 0 || i >= inputs.length) {
+                throw new RangeError(`invalid allowedFields index ${i}`);
+            }
+            return inputs[i];
+        });
+    }
+    return resolveSecurity(...inputs);
 }
 async function extractSecurity(sec) {
     if (sec == null) {

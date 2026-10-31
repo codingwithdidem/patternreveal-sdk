@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NotFoundError$ = exports.NotFoundError$outboundSchema = exports.NotFoundError$inboundSchema = exports.NotFoundCode$ = exports.NotFoundCode$outboundSchema = exports.NotFoundCode$inboundSchema = exports.NotFoundCode = void 0;
-exports.notFoundErrorToJSON = notFoundErrorToJSON;
+exports.NotFoundError$inboundSchema = exports.NotFoundCode$inboundSchema = exports.NotFoundCode = void 0;
 exports.notFoundErrorFromJSON = notFoundErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -51,19 +50,6 @@ exports.NotFoundCode = {
 /** @internal */
 exports.NotFoundCode$inboundSchema = z.nativeEnum(exports.NotFoundCode);
 /** @internal */
-exports.NotFoundCode$outboundSchema = exports.NotFoundCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var NotFoundCode$;
-(function (NotFoundCode$) {
-    /** @deprecated use `NotFoundCode$inboundSchema` instead. */
-    NotFoundCode$.inboundSchema = exports.NotFoundCode$inboundSchema;
-    /** @deprecated use `NotFoundCode$outboundSchema` instead. */
-    NotFoundCode$.outboundSchema = exports.NotFoundCode$outboundSchema;
-})(NotFoundCode$ || (exports.NotFoundCode$ = NotFoundCode$ = {}));
-/** @internal */
 exports.NotFoundError$inboundSchema = z.object({
     code: exports.NotFoundCode$inboundSchema,
     message: z.string(),
@@ -73,30 +59,6 @@ exports.NotFoundError$inboundSchema = z.object({
         "doc_url": "docUrl",
     });
 });
-/** @internal */
-exports.NotFoundError$outboundSchema = z.object({
-    code: exports.NotFoundCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var NotFoundError$;
-(function (NotFoundError$) {
-    /** @deprecated use `NotFoundError$inboundSchema` instead. */
-    NotFoundError$.inboundSchema = exports.NotFoundError$inboundSchema;
-    /** @deprecated use `NotFoundError$outboundSchema` instead. */
-    NotFoundError$.outboundSchema = exports.NotFoundError$outboundSchema;
-})(NotFoundError$ || (exports.NotFoundError$ = NotFoundError$ = {}));
-function notFoundErrorToJSON(notFoundError) {
-    return JSON.stringify(exports.NotFoundError$outboundSchema.parse(notFoundError));
-}
 function notFoundErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.NotFoundError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'NotFoundError' from JSON`);
 }
