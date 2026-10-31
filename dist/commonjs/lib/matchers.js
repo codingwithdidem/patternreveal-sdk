@@ -24,7 +24,7 @@ const patternrevealdefaulterror_js_1 = require("../models/errors/patternrevealde
 const responsevalidationerror_js_1 = require("../models/errors/responsevalidationerror.js");
 const fp_js_1 = require("../types/fp.js");
 const http_js_1 = require("./http.js");
-const is_plain_object_js_1 = require("./is-plain-object.js");
+const primitives_js_1 = require("./primitives.js");
 const DEFAULT_CONTENT_TYPES = {
     jsonl: "application/jsonl",
     json: "application/json",
@@ -140,7 +140,6 @@ function match(...matchers) {
                 raw = body;
                 break;
             default:
-                encoding;
                 throw new Error(`Unsupported response type: ${encoding}`);
         }
         if (matcher.enc === "fail") {
@@ -159,7 +158,7 @@ function match(...matchers) {
             data = {
                 ...options?.extraFields,
                 ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
-                ...((0, is_plain_object_js_1.isPlainObject)(raw) ? raw : null),
+                ...((0, primitives_js_1.isPlainObject)(raw) ? raw : null),
                 request$: request,
                 response$: response,
                 body$: body,
@@ -176,7 +175,7 @@ function match(...matchers) {
             data = {
                 ...options?.extraFields,
                 ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
-                ...((0, is_plain_object_js_1.isPlainObject)(raw) ? raw : null),
+                ...((0, primitives_js_1.isPlainObject)(raw) ? raw : null),
             };
         }
         else {

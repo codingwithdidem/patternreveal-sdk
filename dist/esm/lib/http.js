@@ -15,10 +15,10 @@ const DEFAULT_FETCHER = (input, init) => {
 };
 export class HTTPClient {
     constructor(options = {}) {
-        this.options = options;
         this.requestHooks = [];
         this.requestErrorHooks = [];
         this.responseHooks = [];
+        this.options = options;
         this.fetcher = options.fetcher || DEFAULT_FETCHER;
     }
     async request(request) {
