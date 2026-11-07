@@ -4,7 +4,6 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SDKHooks = void 0;
-const registration_js_1 = require("./registration.js");
 class SDKHooks {
     constructor() {
         this.sdkInitHooks = [];
@@ -30,7 +29,6 @@ class SDKHooks {
                 this.registerAfterErrorHook(hook);
             }
         }
-        (0, registration_js_1.initHooks)(this);
     }
     registerSDKInitHook(hook) {
         this.sdkInitHooks.push(hook);

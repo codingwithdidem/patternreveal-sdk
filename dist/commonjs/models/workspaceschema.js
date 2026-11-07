@@ -36,12 +36,10 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WorkspaceSchema$ = exports.WorkspaceSchema$outboundSchema = exports.WorkspaceSchema$inboundSchema = exports.User$ = exports.User$outboundSchema = exports.User$inboundSchema = exports.Role$ = exports.Role$outboundSchema = exports.Role$inboundSchema = exports.Plan$ = exports.Plan$outboundSchema = exports.Plan$inboundSchema = exports.Role = exports.Plan = void 0;
-exports.userToJSON = userToJSON;
+exports.WorkspaceSchema$inboundSchema = exports.User$inboundSchema = exports.Role$inboundSchema = exports.Plan$inboundSchema = exports.Role = exports.Plan = void 0;
 exports.userFromJSON = userFromJSON;
-exports.workspaceSchemaToJSON = workspaceSchemaToJSON;
 exports.workspaceSchemaFromJSON = workspaceSchemaFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const schemas_js_1 = require("../lib/schemas.js");
 exports.Plan = {
     Free: "free",
@@ -54,56 +52,12 @@ exports.Role = {
 /** @internal */
 exports.Plan$inboundSchema = z.nativeEnum(exports.Plan);
 /** @internal */
-exports.Plan$outboundSchema = exports.Plan$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var Plan$;
-(function (Plan$) {
-    /** @deprecated use `Plan$inboundSchema` instead. */
-    Plan$.inboundSchema = exports.Plan$inboundSchema;
-    /** @deprecated use `Plan$outboundSchema` instead. */
-    Plan$.outboundSchema = exports.Plan$outboundSchema;
-})(Plan$ || (exports.Plan$ = Plan$ = {}));
-/** @internal */
 exports.Role$inboundSchema = z.nativeEnum(exports.Role);
-/** @internal */
-exports.Role$outboundSchema = exports.Role$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var Role$;
-(function (Role$) {
-    /** @deprecated use `Role$inboundSchema` instead. */
-    Role$.inboundSchema = exports.Role$inboundSchema;
-    /** @deprecated use `Role$outboundSchema` instead. */
-    Role$.outboundSchema = exports.Role$outboundSchema;
-})(Role$ || (exports.Role$ = Role$ = {}));
 /** @internal */
 exports.User$inboundSchema = z
     .object({
     role: exports.Role$inboundSchema,
 });
-/** @internal */
-exports.User$outboundSchema = z.object({
-    role: exports.Role$outboundSchema,
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var User$;
-(function (User$) {
-    /** @deprecated use `User$inboundSchema` instead. */
-    User$.inboundSchema = exports.User$inboundSchema;
-    /** @deprecated use `User$outboundSchema` instead. */
-    User$.outboundSchema = exports.User$outboundSchema;
-})(User$ || (exports.User$ = User$ = {}));
-function userToJSON(user) {
-    return JSON.stringify(exports.User$outboundSchema.parse(user));
-}
 function userFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.User$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'User' from JSON`);
 }
@@ -130,43 +84,6 @@ exports.WorkspaceSchema$inboundSchema = z.object({
     updatedAt: z.string(),
     paddleCustomerId: z.nullable(z.string()),
 });
-/** @internal */
-exports.WorkspaceSchema$outboundSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    slug: z.string(),
-    logo: z.nullable(z.string()).default(null),
-    inviteCode: z.nullable(z.string()),
-    billingCycleStart: z.number(),
-    plan: exports.Plan$outboundSchema,
-    totalReflections: z.number(),
-    usage: z.number(),
-    usageLimit: z.number(),
-    reflectionsUsage: z.number(),
-    reflectionsLimit: z.number(),
-    aiUsage: z.number(),
-    aiLimit: z.number(),
-    usersLimit: z.number(),
-    store: z.record(z.any()),
-    users: z.array(z.lazy(() => exports.User$outboundSchema)),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-    paddleCustomerId: z.nullable(z.string()),
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var WorkspaceSchema$;
-(function (WorkspaceSchema$) {
-    /** @deprecated use `WorkspaceSchema$inboundSchema` instead. */
-    WorkspaceSchema$.inboundSchema = exports.WorkspaceSchema$inboundSchema;
-    /** @deprecated use `WorkspaceSchema$outboundSchema` instead. */
-    WorkspaceSchema$.outboundSchema = exports.WorkspaceSchema$outboundSchema;
-})(WorkspaceSchema$ || (exports.WorkspaceSchema$ = WorkspaceSchema$ = {}));
-function workspaceSchemaToJSON(workspaceSchema) {
-    return JSON.stringify(exports.WorkspaceSchema$outboundSchema.parse(workspaceSchema));
-}
 function workspaceSchemaFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.WorkspaceSchema$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'WorkspaceSchema' from JSON`);
 }

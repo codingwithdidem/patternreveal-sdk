@@ -36,51 +36,19 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateWorkspaceRequest$ = exports.UpdateWorkspaceRequest$outboundSchema = exports.UpdateWorkspaceRequest$inboundSchema = exports.UpdateWorkspaceRequestBody$ = exports.UpdateWorkspaceRequestBody$outboundSchema = exports.UpdateWorkspaceRequestBody$inboundSchema = void 0;
+exports.UpdateWorkspaceRequest$outboundSchema = exports.UpdateWorkspaceRequestBody$outboundSchema = void 0;
 exports.updateWorkspaceRequestBodyToJSON = updateWorkspaceRequestBodyToJSON;
-exports.updateWorkspaceRequestBodyFromJSON = updateWorkspaceRequestBodyFromJSON;
 exports.updateWorkspaceRequestToJSON = updateWorkspaceRequestToJSON;
-exports.updateWorkspaceRequestFromJSON = updateWorkspaceRequestFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../../lib/primitives.js");
-const schemas_js_1 = require("../../lib/schemas.js");
-/** @internal */
-exports.UpdateWorkspaceRequestBody$inboundSchema = z.object({
-    name: z.string().optional(),
-    slug: z.string().optional(),
-});
 /** @internal */
 exports.UpdateWorkspaceRequestBody$outboundSchema = z.object({
     name: z.string().optional(),
     slug: z.string().optional(),
 });
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UpdateWorkspaceRequestBody$;
-(function (UpdateWorkspaceRequestBody$) {
-    /** @deprecated use `UpdateWorkspaceRequestBody$inboundSchema` instead. */
-    UpdateWorkspaceRequestBody$.inboundSchema = exports.UpdateWorkspaceRequestBody$inboundSchema;
-    /** @deprecated use `UpdateWorkspaceRequestBody$outboundSchema` instead. */
-    UpdateWorkspaceRequestBody$.outboundSchema = exports.UpdateWorkspaceRequestBody$outboundSchema;
-})(UpdateWorkspaceRequestBody$ || (exports.UpdateWorkspaceRequestBody$ = UpdateWorkspaceRequestBody$ = {}));
 function updateWorkspaceRequestBodyToJSON(updateWorkspaceRequestBody) {
     return JSON.stringify(exports.UpdateWorkspaceRequestBody$outboundSchema.parse(updateWorkspaceRequestBody));
 }
-function updateWorkspaceRequestBodyFromJSON(jsonString) {
-    return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.UpdateWorkspaceRequestBody$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'UpdateWorkspaceRequestBody' from JSON`);
-}
-/** @internal */
-exports.UpdateWorkspaceRequest$inboundSchema = z.object({
-    idOrSlug: z.string(),
-    RequestBody: z.lazy(() => exports.UpdateWorkspaceRequestBody$inboundSchema)
-        .optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        "RequestBody": "requestBody",
-    });
-});
 /** @internal */
 exports.UpdateWorkspaceRequest$outboundSchema = z.object({
     idOrSlug: z.string(),
@@ -91,21 +59,7 @@ exports.UpdateWorkspaceRequest$outboundSchema = z.object({
         requestBody: "RequestBody",
     });
 });
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UpdateWorkspaceRequest$;
-(function (UpdateWorkspaceRequest$) {
-    /** @deprecated use `UpdateWorkspaceRequest$inboundSchema` instead. */
-    UpdateWorkspaceRequest$.inboundSchema = exports.UpdateWorkspaceRequest$inboundSchema;
-    /** @deprecated use `UpdateWorkspaceRequest$outboundSchema` instead. */
-    UpdateWorkspaceRequest$.outboundSchema = exports.UpdateWorkspaceRequest$outboundSchema;
-})(UpdateWorkspaceRequest$ || (exports.UpdateWorkspaceRequest$ = UpdateWorkspaceRequest$ = {}));
 function updateWorkspaceRequestToJSON(updateWorkspaceRequest) {
     return JSON.stringify(exports.UpdateWorkspaceRequest$outboundSchema.parse(updateWorkspaceRequest));
-}
-function updateWorkspaceRequestFromJSON(jsonString) {
-    return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.UpdateWorkspaceRequest$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'UpdateWorkspaceRequest' from JSON`);
 }
 //# sourceMappingURL=updateworkspace.js.map

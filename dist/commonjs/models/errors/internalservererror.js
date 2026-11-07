@@ -36,8 +36,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InternalServerError$ = exports.InternalServerError$outboundSchema = exports.InternalServerError$inboundSchema = exports.InternalServerError = void 0;
-const z = __importStar(require("zod"));
+exports.InternalServerError$inboundSchema = exports.InternalServerError = void 0;
+const z = __importStar(require("zod/v3"));
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -68,21 +68,4 @@ exports.InternalServerError$inboundSchema = z.object({
         body: v.body$,
     });
 });
-/** @internal */
-exports.InternalServerError$outboundSchema = z.instanceof(InternalServerError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.InternalServerErrorError$outboundSchema),
-}));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var InternalServerError$;
-(function (InternalServerError$) {
-    /** @deprecated use `InternalServerError$inboundSchema` instead. */
-    InternalServerError$.inboundSchema = exports.InternalServerError$inboundSchema;
-    /** @deprecated use `InternalServerError$outboundSchema` instead. */
-    InternalServerError$.outboundSchema = exports.InternalServerError$outboundSchema;
-})(InternalServerError$ || (exports.InternalServerError$ = InternalServerError$ = {}));
 //# sourceMappingURL=internalservererror.js.map
