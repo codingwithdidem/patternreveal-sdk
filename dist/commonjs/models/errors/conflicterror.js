@@ -36,8 +36,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConflictError$ = exports.ConflictError$outboundSchema = exports.ConflictError$inboundSchema = exports.ConflictError = void 0;
-const z = __importStar(require("zod"));
+exports.ConflictError$inboundSchema = exports.ConflictError = void 0;
+const z = __importStar(require("zod/v3"));
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -68,21 +68,4 @@ exports.ConflictError$inboundSchema = z.object({
         body: v.body$,
     });
 });
-/** @internal */
-exports.ConflictError$outboundSchema = z.instanceof(ConflictError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.ConflictError$outboundSchema),
-}));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var ConflictError$;
-(function (ConflictError$) {
-    /** @deprecated use `ConflictError$inboundSchema` instead. */
-    ConflictError$.inboundSchema = exports.ConflictError$inboundSchema;
-    /** @deprecated use `ConflictError$outboundSchema` instead. */
-    ConflictError$.outboundSchema = exports.ConflictError$outboundSchema;
-})(ConflictError$ || (exports.ConflictError$ = ConflictError$ = {}));
 //# sourceMappingURL=conflicterror.js.map
