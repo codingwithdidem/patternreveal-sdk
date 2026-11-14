@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnauthorizedError$ = exports.UnauthorizedError$outboundSchema = exports.UnauthorizedError$inboundSchema = exports.UnauthorizedCode$ = exports.UnauthorizedCode$outboundSchema = exports.UnauthorizedCode$inboundSchema = exports.UnauthorizedCode = void 0;
-exports.unauthorizedErrorToJSON = unauthorizedErrorToJSON;
+exports.UnauthorizedError$inboundSchema = exports.UnauthorizedCode$inboundSchema = exports.UnauthorizedCode = void 0;
 exports.unauthorizedErrorFromJSON = unauthorizedErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -51,19 +50,6 @@ exports.UnauthorizedCode = {
 /** @internal */
 exports.UnauthorizedCode$inboundSchema = z.nativeEnum(exports.UnauthorizedCode);
 /** @internal */
-exports.UnauthorizedCode$outboundSchema = exports.UnauthorizedCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UnauthorizedCode$;
-(function (UnauthorizedCode$) {
-    /** @deprecated use `UnauthorizedCode$inboundSchema` instead. */
-    UnauthorizedCode$.inboundSchema = exports.UnauthorizedCode$inboundSchema;
-    /** @deprecated use `UnauthorizedCode$outboundSchema` instead. */
-    UnauthorizedCode$.outboundSchema = exports.UnauthorizedCode$outboundSchema;
-})(UnauthorizedCode$ || (exports.UnauthorizedCode$ = UnauthorizedCode$ = {}));
-/** @internal */
 exports.UnauthorizedError$inboundSchema = z.object({
     code: exports.UnauthorizedCode$inboundSchema,
     message: z.string(),
@@ -73,30 +59,6 @@ exports.UnauthorizedError$inboundSchema = z.object({
         "doc_url": "docUrl",
     });
 });
-/** @internal */
-exports.UnauthorizedError$outboundSchema = z.object({
-    code: exports.UnauthorizedCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UnauthorizedError$;
-(function (UnauthorizedError$) {
-    /** @deprecated use `UnauthorizedError$inboundSchema` instead. */
-    UnauthorizedError$.inboundSchema = exports.UnauthorizedError$inboundSchema;
-    /** @deprecated use `UnauthorizedError$outboundSchema` instead. */
-    UnauthorizedError$.outboundSchema = exports.UnauthorizedError$outboundSchema;
-})(UnauthorizedError$ || (exports.UnauthorizedError$ = UnauthorizedError$ = {}));
-function unauthorizedErrorToJSON(unauthorizedError) {
-    return JSON.stringify(exports.UnauthorizedError$outboundSchema.parse(unauthorizedError));
-}
 function unauthorizedErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.UnauthorizedError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'UnauthorizedError' from JSON`);
 }

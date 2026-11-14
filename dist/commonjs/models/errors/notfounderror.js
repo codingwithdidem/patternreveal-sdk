@@ -36,8 +36,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NotFoundError$ = exports.NotFoundError$outboundSchema = exports.NotFoundError$inboundSchema = exports.NotFoundError = void 0;
-const z = __importStar(require("zod"));
+exports.NotFoundError$inboundSchema = exports.NotFoundError = void 0;
+const z = __importStar(require("zod/v3"));
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -68,21 +68,4 @@ exports.NotFoundError$inboundSchema = z.object({
         body: v.body$,
     });
 });
-/** @internal */
-exports.NotFoundError$outboundSchema = z.instanceof(NotFoundError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.NotFoundError$outboundSchema),
-}));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var NotFoundError$;
-(function (NotFoundError$) {
-    /** @deprecated use `NotFoundError$inboundSchema` instead. */
-    NotFoundError$.inboundSchema = exports.NotFoundError$inboundSchema;
-    /** @deprecated use `NotFoundError$outboundSchema` instead. */
-    NotFoundError$.outboundSchema = exports.NotFoundError$outboundSchema;
-})(NotFoundError$ || (exports.NotFoundError$ = NotFoundError$ = {}));
 //# sourceMappingURL=notfounderror.js.map

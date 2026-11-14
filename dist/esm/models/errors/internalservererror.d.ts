@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 import * as models from "../index.js";
 import { PatternrevealError } from "./patternrevealerror.js";
 /**
@@ -22,22 +22,4 @@ export declare class InternalServerError extends PatternrevealError {
 }
 /** @internal */
 export declare const InternalServerError$inboundSchema: z.ZodType<InternalServerError, z.ZodTypeDef, unknown>;
-/** @internal */
-export type InternalServerError$Outbound = {
-    error: models.InternalServerErrorError$Outbound;
-};
-/** @internal */
-export declare const InternalServerError$outboundSchema: z.ZodType<InternalServerError$Outbound, z.ZodTypeDef, InternalServerError>;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export declare namespace InternalServerError$ {
-    /** @deprecated use `InternalServerError$inboundSchema` instead. */
-    const inboundSchema: z.ZodType<InternalServerError, z.ZodTypeDef, unknown>;
-    /** @deprecated use `InternalServerError$outboundSchema` instead. */
-    const outboundSchema: z.ZodType<InternalServerError$Outbound, z.ZodTypeDef, InternalServerError>;
-    /** @deprecated use `InternalServerError$Outbound` instead. */
-    type Outbound = InternalServerError$Outbound;
-}
 //# sourceMappingURL=internalservererror.d.ts.map
