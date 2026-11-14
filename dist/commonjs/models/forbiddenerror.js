@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ForbiddenError$ = exports.ForbiddenError$outboundSchema = exports.ForbiddenError$inboundSchema = exports.ForbiddenCode$ = exports.ForbiddenCode$outboundSchema = exports.ForbiddenCode$inboundSchema = exports.ForbiddenCode = void 0;
-exports.forbiddenErrorToJSON = forbiddenErrorToJSON;
+exports.ForbiddenError$inboundSchema = exports.ForbiddenCode$inboundSchema = exports.ForbiddenCode = void 0;
 exports.forbiddenErrorFromJSON = forbiddenErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -51,19 +50,6 @@ exports.ForbiddenCode = {
 /** @internal */
 exports.ForbiddenCode$inboundSchema = z.nativeEnum(exports.ForbiddenCode);
 /** @internal */
-exports.ForbiddenCode$outboundSchema = exports.ForbiddenCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var ForbiddenCode$;
-(function (ForbiddenCode$) {
-    /** @deprecated use `ForbiddenCode$inboundSchema` instead. */
-    ForbiddenCode$.inboundSchema = exports.ForbiddenCode$inboundSchema;
-    /** @deprecated use `ForbiddenCode$outboundSchema` instead. */
-    ForbiddenCode$.outboundSchema = exports.ForbiddenCode$outboundSchema;
-})(ForbiddenCode$ || (exports.ForbiddenCode$ = ForbiddenCode$ = {}));
-/** @internal */
 exports.ForbiddenError$inboundSchema = z.object({
     code: exports.ForbiddenCode$inboundSchema,
     message: z.string(),
@@ -73,30 +59,6 @@ exports.ForbiddenError$inboundSchema = z.object({
         "doc_url": "docUrl",
     });
 });
-/** @internal */
-exports.ForbiddenError$outboundSchema = z.object({
-    code: exports.ForbiddenCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var ForbiddenError$;
-(function (ForbiddenError$) {
-    /** @deprecated use `ForbiddenError$inboundSchema` instead. */
-    ForbiddenError$.inboundSchema = exports.ForbiddenError$inboundSchema;
-    /** @deprecated use `ForbiddenError$outboundSchema` instead. */
-    ForbiddenError$.outboundSchema = exports.ForbiddenError$outboundSchema;
-})(ForbiddenError$ || (exports.ForbiddenError$ = ForbiddenError$ = {}));
-function forbiddenErrorToJSON(forbiddenError) {
-    return JSON.stringify(exports.ForbiddenError$outboundSchema.parse(forbiddenError));
-}
 function forbiddenErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.ForbiddenError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'ForbiddenError' from JSON`);
 }
