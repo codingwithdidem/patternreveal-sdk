@@ -36,8 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InviteExpiredError$ = exports.InviteExpiredError$outboundSchema = exports.InviteExpiredError$inboundSchema = exports.InviteExpiredError = void 0;
-const z = __importStar(require("zod"));
+exports.InviteExpiredError$inboundSchema = exports.InviteExpiredError = void 0;
+const z = __importStar(require("zod/v3"));
+const schemas_js_1 = require("../../lib/schemas.js");
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -55,7 +56,7 @@ class InviteExpiredError extends patternrevealerror_js_1.PatternrevealError {
 }
 exports.InviteExpiredError = InviteExpiredError;
 /** @internal */
-exports.InviteExpiredError$inboundSchema = z.object({
+exports.InviteExpiredError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     error: z.lazy(() => models.InviteExpiredError$inboundSchema),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
@@ -67,22 +68,5 @@ exports.InviteExpiredError$inboundSchema = z.object({
         response: v.response$,
         body: v.body$,
     });
-});
-/** @internal */
-exports.InviteExpiredError$outboundSchema = z.instanceof(InviteExpiredError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.InviteExpiredError$outboundSchema),
 }));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var InviteExpiredError$;
-(function (InviteExpiredError$) {
-    /** @deprecated use `InviteExpiredError$inboundSchema` instead. */
-    InviteExpiredError$.inboundSchema = exports.InviteExpiredError$inboundSchema;
-    /** @deprecated use `InviteExpiredError$outboundSchema` instead. */
-    InviteExpiredError$.outboundSchema = exports.InviteExpiredError$outboundSchema;
-})(InviteExpiredError$ || (exports.InviteExpiredError$ = InviteExpiredError$ = {}));
 //# sourceMappingURL=inviteexpirederror.js.map

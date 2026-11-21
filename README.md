@@ -53,28 +53,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/codingwithdidem/patternreveal-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/codingwithdidem/patternreveal-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/codingwithdidem/patternreveal-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add https://github.com/codingwithdidem/patternreveal-sdk
 ```
 
 > [!NOTE]
@@ -85,6 +82,26 @@ yarn add <UNSET> zod
 ## Requirements
 
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
+
+### Lazy operation loading in Node.js
+
+The `/node` entry point and its lazy SDK classes are generated for every SDK. No `gen.yaml` flag is needed; Node.js applications opt in to loading operation functions on first use by changing their import:
+
+```typescript
+import { Patternreveal } from "patternreveal/node";
+
+const sdk = new Patternreveal();
+```
+
+The `/node` entry point keeps the same method signatures, pagination behaviour, and response helpers. Operation modules load through dynamic imports when a method is called. Models and error classes are shared with the standard entry points, rather than bundled into separate copies.
+
+The standard package entry point and SDK subpaths retain their static imports. Keep using those entry points in browser bundles, including IIFE and UMD builds, to avoid dynamic-import chunks. Custom root exports may still load additional modules.
+
+The Node SDK classes live in `src/sdk/*.lazy.ts`. Custom code regions in the standard SDK classes are not copied to these classes; apply any required customisations to their separate regions. Accept-header enums have the same values, but their enum objects are specific to each entry point.
+
+Generated model schemas are constructed synchronously and cached on first use with either entry point. Importing a model does not construct its schema; parsing or inspecting a schema does. This does not require changing the configured Zod version.
+
+`Object.freeze`, `Object.seal`, and `Object.preventExtensions` construct the schema and apply to the cached Zod object. Zod's own restrictions on frozen schemas still apply, including methods that install properties on first access.
 <!-- End Requirements [requirements] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -150,8 +167,7 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-
-### [workspaces](docs/sdks/workspaces/README.md)
+### [Workspaces](docs/sdks/workspaces/README.md)
 
 * [get](docs/sdks/workspaces/README.md#get) - Retrieve a workspace
 * [update](docs/sdks/workspaces/README.md#update) - Update a workspace
@@ -368,19 +384,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Patternreveal } from "patternreveal";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "patternreveal/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {
@@ -400,7 +420,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Patternreveal({ httpClient });
+const sdk = new Patternreveal({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
@@ -420,7 +440,7 @@ import { Patternreveal } from "patternreveal";
 const sdk = new Patternreveal({ debugLogger: console });
 ```
 
-You can also enable a default debug logger by setting an environment variable `PATTERNREVEAL_DEBUG` to true.
+You can also enable a default debug logger by setting an environment variable `PATTERNREVEAL_DEBUG` to `true`, `1`, `yes` or `on` (case-insensitive). Any other value leaves it off.
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

@@ -36,8 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BadRequestError$ = exports.BadRequestError$outboundSchema = exports.BadRequestError$inboundSchema = exports.BadRequestError = void 0;
-const z = __importStar(require("zod"));
+exports.BadRequestError$inboundSchema = exports.BadRequestError = void 0;
+const z = __importStar(require("zod/v3"));
+const schemas_js_1 = require("../../lib/schemas.js");
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -55,7 +56,7 @@ class BadRequestError extends patternrevealerror_js_1.PatternrevealError {
 }
 exports.BadRequestError = BadRequestError;
 /** @internal */
-exports.BadRequestError$inboundSchema = z.object({
+exports.BadRequestError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     error: z.lazy(() => models.BadRequestError$inboundSchema),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
@@ -67,22 +68,5 @@ exports.BadRequestError$inboundSchema = z.object({
         response: v.response$,
         body: v.body$,
     });
-});
-/** @internal */
-exports.BadRequestError$outboundSchema = z.instanceof(BadRequestError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.BadRequestError$outboundSchema),
 }));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var BadRequestError$;
-(function (BadRequestError$) {
-    /** @deprecated use `BadRequestError$inboundSchema` instead. */
-    BadRequestError$.inboundSchema = exports.BadRequestError$inboundSchema;
-    /** @deprecated use `BadRequestError$outboundSchema` instead. */
-    BadRequestError$.outboundSchema = exports.BadRequestError$outboundSchema;
-})(BadRequestError$ || (exports.BadRequestError$ = BadRequestError$ = {}));
 //# sourceMappingURL=badrequesterror.js.map

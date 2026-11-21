@@ -4,12 +4,12 @@
 
 import { PatternrevealCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -111,8 +111,11 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
-  const path = pathToFunc("/workspaces/{idOrSlug}")(pathParams);
+  const pathResult = encodePath("/workspaces/{idOrSlug}", pathParams);
+  if (!pathResult.ok) {
+    return [pathResult, { status: "invalid" }];
+  }
+  const path = pathResult.value;
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -126,7 +129,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "getWorkspace",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -154,19 +157,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [
-      "400",
-      "401",
-      "403",
-      "404",
-      "409",
-      "410",
-      "422",
-      "429",
-      "4XX",
-      "500",
-      "5XX",
-    ],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
