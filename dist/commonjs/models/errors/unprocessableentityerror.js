@@ -36,8 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnprocessableEntityError$ = exports.UnprocessableEntityError$outboundSchema = exports.UnprocessableEntityError$inboundSchema = exports.UnprocessableEntityError = void 0;
-const z = __importStar(require("zod"));
+exports.UnprocessableEntityError$inboundSchema = exports.UnprocessableEntityError = void 0;
+const z = __importStar(require("zod/v3"));
+const schemas_js_1 = require("../../lib/schemas.js");
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -55,7 +56,7 @@ class UnprocessableEntityError extends patternrevealerror_js_1.PatternrevealErro
 }
 exports.UnprocessableEntityError = UnprocessableEntityError;
 /** @internal */
-exports.UnprocessableEntityError$inboundSchema = z.object({
+exports.UnprocessableEntityError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     error: z.lazy(() => models.UnprocessableEntityError$inboundSchema),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
@@ -67,22 +68,5 @@ exports.UnprocessableEntityError$inboundSchema = z.object({
         response: v.response$,
         body: v.body$,
     });
-});
-/** @internal */
-exports.UnprocessableEntityError$outboundSchema = z.instanceof(UnprocessableEntityError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.UnprocessableEntityError$outboundSchema),
 }));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UnprocessableEntityError$;
-(function (UnprocessableEntityError$) {
-    /** @deprecated use `UnprocessableEntityError$inboundSchema` instead. */
-    UnprocessableEntityError$.inboundSchema = exports.UnprocessableEntityError$inboundSchema;
-    /** @deprecated use `UnprocessableEntityError$outboundSchema` instead. */
-    UnprocessableEntityError$.outboundSchema = exports.UnprocessableEntityError$outboundSchema;
-})(UnprocessableEntityError$ || (exports.UnprocessableEntityError$ = UnprocessableEntityError$ = {}));
 //# sourceMappingURL=unprocessableentityerror.js.map

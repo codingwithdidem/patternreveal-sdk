@@ -5,6 +5,7 @@ import { Result } from "../types/fp.js";
 import { SDKOptions } from "./config.js";
 import { RetryConfig } from "./retries.js";
 import { SecurityState } from "./security.js";
+import { Params } from "./url.js";
 export type RequestOptions = {
     /**
      * Sets a timeout, in milliseconds, on HTTP requests made by an SDK method. If
@@ -44,6 +45,7 @@ type RequestConfig = {
     userAgent?: string | undefined;
     timeoutMs?: number;
 };
+export declare function encodePath(pathPattern: string, params: Params): Result<string, InvalidRequestError>;
 export declare class ClientSDK {
     #private;
     readonly _baseURL: URL | null;
@@ -54,7 +56,7 @@ export declare class ClientSDK {
     _createRequest(context: HookContext, conf: RequestConfig, options?: RequestOptions): Result<Request, InvalidRequestError | UnexpectedClientError>;
     _do(request: Request, options: {
         context: HookContext;
-        errorCodes: number | string | (number | string)[];
+        isErrorStatusCode: (statusCode: number) => boolean;
         retryConfig: RetryConfig;
         retryCodes: string[];
     }): Promise<Result<Response, RequestAbortedError | RequestTimeoutError | ConnectionError | UnexpectedClientError>>;

@@ -1,6 +1,7 @@
-import { output, ZodEffects, ZodObject, ZodRawShape, ZodTypeAny } from "zod";
+import { output, ZodEffects, ZodObject, ZodRawShape, ZodTypeAny } from "zod/v3";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { Result } from "../types/fp.js";
+export declare function lazySchema<T extends object>(factory: () => T): T;
 /**
  * Utility function that executes some code which may throw a ZodError. It
  * intercepts this error and converts it to an SDKValidationError so as to not

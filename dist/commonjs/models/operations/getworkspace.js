@@ -36,34 +36,15 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetWorkspaceRequest$ = exports.GetWorkspaceRequest$outboundSchema = exports.GetWorkspaceRequest$inboundSchema = void 0;
+exports.GetWorkspaceRequest$outboundSchema = void 0;
 exports.getWorkspaceRequestToJSON = getWorkspaceRequestToJSON;
-exports.getWorkspaceRequestFromJSON = getWorkspaceRequestFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const schemas_js_1 = require("../../lib/schemas.js");
 /** @internal */
-exports.GetWorkspaceRequest$inboundSchema = z.object({
+exports.GetWorkspaceRequest$outboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     idOrSlug: z.string(),
-});
-/** @internal */
-exports.GetWorkspaceRequest$outboundSchema = z.object({
-    idOrSlug: z.string(),
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var GetWorkspaceRequest$;
-(function (GetWorkspaceRequest$) {
-    /** @deprecated use `GetWorkspaceRequest$inboundSchema` instead. */
-    GetWorkspaceRequest$.inboundSchema = exports.GetWorkspaceRequest$inboundSchema;
-    /** @deprecated use `GetWorkspaceRequest$outboundSchema` instead. */
-    GetWorkspaceRequest$.outboundSchema = exports.GetWorkspaceRequest$outboundSchema;
-})(GetWorkspaceRequest$ || (exports.GetWorkspaceRequest$ = GetWorkspaceRequest$ = {}));
+}));
 function getWorkspaceRequestToJSON(getWorkspaceRequest) {
     return JSON.stringify(exports.GetWorkspaceRequest$outboundSchema.parse(getWorkspaceRequest));
-}
-function getWorkspaceRequestFromJSON(jsonString) {
-    return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.GetWorkspaceRequest$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'GetWorkspaceRequest' from JSON`);
 }
 //# sourceMappingURL=getworkspace.js.map

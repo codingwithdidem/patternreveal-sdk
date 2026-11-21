@@ -36,8 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnauthorizedError$ = exports.UnauthorizedError$outboundSchema = exports.UnauthorizedError$inboundSchema = exports.UnauthorizedError = void 0;
-const z = __importStar(require("zod"));
+exports.UnauthorizedError$inboundSchema = exports.UnauthorizedError = void 0;
+const z = __importStar(require("zod/v3"));
+const schemas_js_1 = require("../../lib/schemas.js");
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -55,7 +56,7 @@ class UnauthorizedError extends patternrevealerror_js_1.PatternrevealError {
 }
 exports.UnauthorizedError = UnauthorizedError;
 /** @internal */
-exports.UnauthorizedError$inboundSchema = z.object({
+exports.UnauthorizedError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     error: z.lazy(() => models.UnauthorizedError$inboundSchema),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
@@ -67,22 +68,5 @@ exports.UnauthorizedError$inboundSchema = z.object({
         response: v.response$,
         body: v.body$,
     });
-});
-/** @internal */
-exports.UnauthorizedError$outboundSchema = z.instanceof(UnauthorizedError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.UnauthorizedError$outboundSchema),
 }));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var UnauthorizedError$;
-(function (UnauthorizedError$) {
-    /** @deprecated use `UnauthorizedError$inboundSchema` instead. */
-    UnauthorizedError$.inboundSchema = exports.UnauthorizedError$inboundSchema;
-    /** @deprecated use `UnauthorizedError$outboundSchema` instead. */
-    UnauthorizedError$.outboundSchema = exports.UnauthorizedError$outboundSchema;
-})(UnauthorizedError$ || (exports.UnauthorizedError$ = UnauthorizedError$ = {}));
 //# sourceMappingURL=unauthorizederror.js.map
