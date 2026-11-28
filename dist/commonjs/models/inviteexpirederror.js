@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InviteExpiredError$ = exports.InviteExpiredError$outboundSchema = exports.InviteExpiredError$inboundSchema = exports.InviteExpiredCode$ = exports.InviteExpiredCode$outboundSchema = exports.InviteExpiredCode$inboundSchema = exports.InviteExpiredCode = void 0;
-exports.inviteExpiredErrorToJSON = inviteExpiredErrorToJSON;
+exports.InviteExpiredError$inboundSchema = exports.InviteExpiredCode$inboundSchema = exports.InviteExpiredCode = void 0;
 exports.inviteExpiredErrorFromJSON = inviteExpiredErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -49,22 +48,9 @@ exports.InviteExpiredCode = {
     InviteExpired: "invite_expired",
 };
 /** @internal */
-exports.InviteExpiredCode$inboundSchema = z.nativeEnum(exports.InviteExpiredCode);
+exports.InviteExpiredCode$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.nativeEnum(exports.InviteExpiredCode));
 /** @internal */
-exports.InviteExpiredCode$outboundSchema = exports.InviteExpiredCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var InviteExpiredCode$;
-(function (InviteExpiredCode$) {
-    /** @deprecated use `InviteExpiredCode$inboundSchema` instead. */
-    InviteExpiredCode$.inboundSchema = exports.InviteExpiredCode$inboundSchema;
-    /** @deprecated use `InviteExpiredCode$outboundSchema` instead. */
-    InviteExpiredCode$.outboundSchema = exports.InviteExpiredCode$outboundSchema;
-})(InviteExpiredCode$ || (exports.InviteExpiredCode$ = InviteExpiredCode$ = {}));
-/** @internal */
-exports.InviteExpiredError$inboundSchema = z.object({
+exports.InviteExpiredError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     code: exports.InviteExpiredCode$inboundSchema,
     message: z.string(),
     doc_url: z.string().optional(),
@@ -72,31 +58,7 @@ exports.InviteExpiredError$inboundSchema = z.object({
     return (0, primitives_js_1.remap)(v, {
         "doc_url": "docUrl",
     });
-});
-/** @internal */
-exports.InviteExpiredError$outboundSchema = z.object({
-    code: exports.InviteExpiredCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var InviteExpiredError$;
-(function (InviteExpiredError$) {
-    /** @deprecated use `InviteExpiredError$inboundSchema` instead. */
-    InviteExpiredError$.inboundSchema = exports.InviteExpiredError$inboundSchema;
-    /** @deprecated use `InviteExpiredError$outboundSchema` instead. */
-    InviteExpiredError$.outboundSchema = exports.InviteExpiredError$outboundSchema;
-})(InviteExpiredError$ || (exports.InviteExpiredError$ = InviteExpiredError$ = {}));
-function inviteExpiredErrorToJSON(inviteExpiredError) {
-    return JSON.stringify(exports.InviteExpiredError$outboundSchema.parse(inviteExpiredError));
-}
+}));
 function inviteExpiredErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.InviteExpiredError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'InviteExpiredError' from JSON`);
 }

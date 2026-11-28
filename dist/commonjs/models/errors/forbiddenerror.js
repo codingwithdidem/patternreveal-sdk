@@ -36,8 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ForbiddenError$ = exports.ForbiddenError$outboundSchema = exports.ForbiddenError$inboundSchema = exports.ForbiddenError = void 0;
-const z = __importStar(require("zod"));
+exports.ForbiddenError$inboundSchema = exports.ForbiddenError = void 0;
+const z = __importStar(require("zod/v3"));
+const schemas_js_1 = require("../../lib/schemas.js");
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -55,34 +56,18 @@ class ForbiddenError extends patternrevealerror_js_1.PatternrevealError {
 }
 exports.ForbiddenError = ForbiddenError;
 /** @internal */
-exports.ForbiddenError$inboundSchema = z.object({
+exports.ForbiddenError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     error: z.lazy(() => models.ForbiddenError$inboundSchema),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
     body$: z.string(),
 })
     .transform((v) => {
-    return new ForbiddenError(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+    const { request$, response$, body$, ...data } = v;
+    return new ForbiddenError(data, {
+        request: request$,
+        response: response$,
+        body: body$,
     });
-});
-/** @internal */
-exports.ForbiddenError$outboundSchema = z.instanceof(ForbiddenError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.ForbiddenError$outboundSchema),
 }));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var ForbiddenError$;
-(function (ForbiddenError$) {
-    /** @deprecated use `ForbiddenError$inboundSchema` instead. */
-    ForbiddenError$.inboundSchema = exports.ForbiddenError$inboundSchema;
-    /** @deprecated use `ForbiddenError$outboundSchema` instead. */
-    ForbiddenError$.outboundSchema = exports.ForbiddenError$outboundSchema;
-})(ForbiddenError$ || (exports.ForbiddenError$ = ForbiddenError$ = {}));
 //# sourceMappingURL=forbiddenerror.js.map

@@ -36,8 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RateLimitExceededError$ = exports.RateLimitExceededError$outboundSchema = exports.RateLimitExceededError$inboundSchema = exports.RateLimitExceededError = void 0;
-const z = __importStar(require("zod"));
+exports.RateLimitExceededError$inboundSchema = exports.RateLimitExceededError = void 0;
+const z = __importStar(require("zod/v3"));
+const schemas_js_1 = require("../../lib/schemas.js");
 const models = __importStar(require("../index.js"));
 const patternrevealerror_js_1 = require("./patternrevealerror.js");
 /**
@@ -55,34 +56,18 @@ class RateLimitExceededError extends patternrevealerror_js_1.PatternrevealError 
 }
 exports.RateLimitExceededError = RateLimitExceededError;
 /** @internal */
-exports.RateLimitExceededError$inboundSchema = z.object({
+exports.RateLimitExceededError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     error: z.lazy(() => models.RateLimitExceededError$inboundSchema),
     request$: z.instanceof(Request),
     response$: z.instanceof(Response),
     body$: z.string(),
 })
     .transform((v) => {
-    return new RateLimitExceededError(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+    const { request$, response$, body$, ...data } = v;
+    return new RateLimitExceededError(data, {
+        request: request$,
+        response: response$,
+        body: body$,
     });
-});
-/** @internal */
-exports.RateLimitExceededError$outboundSchema = z.instanceof(RateLimitExceededError)
-    .transform(v => v.data$)
-    .pipe(z.object({
-    error: z.lazy(() => models.RateLimitExceededError$outboundSchema),
 }));
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var RateLimitExceededError$;
-(function (RateLimitExceededError$) {
-    /** @deprecated use `RateLimitExceededError$inboundSchema` instead. */
-    RateLimitExceededError$.inboundSchema = exports.RateLimitExceededError$inboundSchema;
-    /** @deprecated use `RateLimitExceededError$outboundSchema` instead. */
-    RateLimitExceededError$.outboundSchema = exports.RateLimitExceededError$outboundSchema;
-})(RateLimitExceededError$ || (exports.RateLimitExceededError$ = RateLimitExceededError$ = {}));
 //# sourceMappingURL=ratelimitexceedederror.js.map

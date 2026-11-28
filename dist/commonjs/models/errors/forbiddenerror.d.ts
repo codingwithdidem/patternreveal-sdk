@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod/v3";
 import * as models from "../index.js";
 import { PatternrevealError } from "./patternrevealerror.js";
 /**
@@ -22,22 +22,4 @@ export declare class ForbiddenError extends PatternrevealError {
 }
 /** @internal */
 export declare const ForbiddenError$inboundSchema: z.ZodType<ForbiddenError, z.ZodTypeDef, unknown>;
-/** @internal */
-export type ForbiddenError$Outbound = {
-    error: models.ForbiddenError$Outbound;
-};
-/** @internal */
-export declare const ForbiddenError$outboundSchema: z.ZodType<ForbiddenError$Outbound, z.ZodTypeDef, ForbiddenError>;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export declare namespace ForbiddenError$ {
-    /** @deprecated use `ForbiddenError$inboundSchema` instead. */
-    const inboundSchema: z.ZodType<ForbiddenError, z.ZodTypeDef, unknown>;
-    /** @deprecated use `ForbiddenError$outboundSchema` instead. */
-    const outboundSchema: z.ZodType<ForbiddenError$Outbound, z.ZodTypeDef, ForbiddenError>;
-    /** @deprecated use `ForbiddenError$Outbound` instead. */
-    type Outbound = ForbiddenError$Outbound;
-}
 //# sourceMappingURL=forbiddenerror.d.ts.map
