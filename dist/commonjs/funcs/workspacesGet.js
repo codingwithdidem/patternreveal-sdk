@@ -38,11 +38,12 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.workspacesGet = workspacesGet;
 const encodings_js_1 = require("../lib/encodings.js");
+const http_js_1 = require("../lib/http.js");
 const M = __importStar(require("../lib/matchers.js"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
+const sdks_js_1 = require("../lib/sdks.js");
 const security_js_1 = require("../lib/security.js");
-const url_js_1 = require("../lib/url.js");
 const errors = __importStar(require("../models/errors/index.js"));
 const models = __importStar(require("../models/index.js"));
 const operations = __importStar(require("../models/operations/index.js"));
@@ -69,7 +70,11 @@ async function $do(client, request, options) {
             charEncoding: "percent",
         }),
     };
-    const path = (0, url_js_1.pathToFunc)("/workspaces/{idOrSlug}")(pathParams);
+    const pathResult = (0, sdks_js_1.encodePath)("/workspaces/{idOrSlug}", pathParams);
+    if (!pathResult.ok) {
+        return [pathResult, { status: "invalid" }];
+    }
+    const path = pathResult.value;
     const headers = new Headers((0, primitives_js_1.compactMap)({
         Accept: "application/json",
     }));
@@ -80,7 +85,7 @@ async function $do(client, request, options) {
         options: client._options,
         baseURL: options?.serverURL ?? client._baseURL ?? "",
         operationID: "getWorkspace",
-        oAuth2Scopes: [],
+        oAuth2Scopes: null,
         resolvedSecurity: requestSecurity,
         securitySource: client._options.token,
         retryConfig: options?.retries
@@ -104,19 +109,7 @@ async function $do(client, request, options) {
     const req = requestRes.value;
     const doResult = await client._do(req, {
         context,
-        errorCodes: [
-            "400",
-            "401",
-            "403",
-            "404",
-            "409",
-            "410",
-            "422",
-            "429",
-            "4XX",
-            "500",
-            "5XX",
-        ],
+        isErrorStatusCode: (statusCode) => (0, http_js_1.matchStatusCode)({ status: statusCode }, ["4XX", "5XX"]),
         retryConfig: context.retryConfig,
         retryCodes: context.retryCodes,
     });

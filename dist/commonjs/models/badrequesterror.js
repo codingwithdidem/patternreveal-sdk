@@ -36,10 +36,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BadRequestError$ = exports.BadRequestError$outboundSchema = exports.BadRequestError$inboundSchema = exports.BadRequestCode$ = exports.BadRequestCode$outboundSchema = exports.BadRequestCode$inboundSchema = exports.BadRequestCode = void 0;
-exports.badRequestErrorToJSON = badRequestErrorToJSON;
+exports.BadRequestError$inboundSchema = exports.BadRequestCode$inboundSchema = exports.BadRequestCode = void 0;
 exports.badRequestErrorFromJSON = badRequestErrorFromJSON;
-const z = __importStar(require("zod"));
+const z = __importStar(require("zod/v3"));
 const primitives_js_1 = require("../lib/primitives.js");
 const schemas_js_1 = require("../lib/schemas.js");
 /**
@@ -49,22 +48,9 @@ exports.BadRequestCode = {
     BadRequest: "bad_request",
 };
 /** @internal */
-exports.BadRequestCode$inboundSchema = z.nativeEnum(exports.BadRequestCode);
+exports.BadRequestCode$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.nativeEnum(exports.BadRequestCode));
 /** @internal */
-exports.BadRequestCode$outboundSchema = exports.BadRequestCode$inboundSchema;
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var BadRequestCode$;
-(function (BadRequestCode$) {
-    /** @deprecated use `BadRequestCode$inboundSchema` instead. */
-    BadRequestCode$.inboundSchema = exports.BadRequestCode$inboundSchema;
-    /** @deprecated use `BadRequestCode$outboundSchema` instead. */
-    BadRequestCode$.outboundSchema = exports.BadRequestCode$outboundSchema;
-})(BadRequestCode$ || (exports.BadRequestCode$ = BadRequestCode$ = {}));
-/** @internal */
-exports.BadRequestError$inboundSchema = z.object({
+exports.BadRequestError$inboundSchema = (0, schemas_js_1.lazySchema)(() => z.object({
     code: exports.BadRequestCode$inboundSchema,
     message: z.string(),
     doc_url: z.string().optional(),
@@ -72,31 +58,7 @@ exports.BadRequestError$inboundSchema = z.object({
     return (0, primitives_js_1.remap)(v, {
         "doc_url": "docUrl",
     });
-});
-/** @internal */
-exports.BadRequestError$outboundSchema = z.object({
-    code: exports.BadRequestCode$outboundSchema,
-    message: z.string(),
-    docUrl: z.string().optional(),
-}).transform((v) => {
-    return (0, primitives_js_1.remap)(v, {
-        docUrl: "doc_url",
-    });
-});
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-var BadRequestError$;
-(function (BadRequestError$) {
-    /** @deprecated use `BadRequestError$inboundSchema` instead. */
-    BadRequestError$.inboundSchema = exports.BadRequestError$inboundSchema;
-    /** @deprecated use `BadRequestError$outboundSchema` instead. */
-    BadRequestError$.outboundSchema = exports.BadRequestError$outboundSchema;
-})(BadRequestError$ || (exports.BadRequestError$ = BadRequestError$ = {}));
-function badRequestErrorToJSON(badRequestError) {
-    return JSON.stringify(exports.BadRequestError$outboundSchema.parse(badRequestError));
-}
+}));
 function badRequestErrorFromJSON(jsonString) {
     return (0, schemas_js_1.safeParse)(jsonString, (x) => exports.BadRequestError$inboundSchema.parse(JSON.parse(x)), `Failed to parse 'BadRequestError' from JSON`);
 }
